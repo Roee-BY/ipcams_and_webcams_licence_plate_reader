@@ -1,0 +1,9 @@
+__pycache__/*
+android/*
+data/*
+examples/*
+yolov4-tiny-416/*
+yolov4-tiny-pretflite-416/*
+.idea/*
+core/__pycache__/*
+libraries/__pycache__/*
