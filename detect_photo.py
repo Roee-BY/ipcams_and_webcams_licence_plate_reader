@@ -28,8 +28,8 @@ for x in boxes:
         image= img[x['c0']:x['c2'], x['c1']:x['c3']]
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         gray = cv2.bilateralFilter(gray, 13, 15, 15)
-
-        edged = cv2.Canny(gray, 30, 200)
+        edged = cv2.Canny(gray, 300, 600)
+        cv2.imshow("a",edged)
         contours = cv2.findContours(edged.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         contours = imutils.grab_contours(contours)#grabs the contours according to opencv ver
         contours = sorted(contours, key = cv2.contourArea, reverse = True)[:10]
@@ -52,27 +52,28 @@ for x in boxes:
         if detected == 1:
             for x in screenCnt:
                 cv2.drawContours(image, [x], -1, (0, 0, 255), 3)
-        cv2. imshow('gray',image)
-        cv2.waitKey(0)
-        mask = np.zeros(gray.shape,np.uint8)
-        new_image = cv2.drawContours(mask,[screenCnt],0,255,-1,)
-        new_image = cv2.bitwise_and(image,image,mask=mask)
-        print("1")
+                cv2.imshow('img',image)
+                cv2.waitKey(0)
+                xs=[]
+                ys=[]
+                for y in x:
+                    xs.append(y[0][0])
+                    ys.append(y[0][1])
+                xmin= np.min(xs)
+                xmax = np.max(xs)
+                ymin = np.min(ys)
+                ymax = np.max(ys)
+                cropped = image[ymin:ymax,xmin:xmax]
+                cv2.imshow("cropped",cropped)
+                cv2.waitKey(0)
 
-        (x, y) = np.where(mask == 255)
-        (topx, topy) = (np.min(x), np.min(y))
-        (bottomx, bottomy) = (np.max(x), np.max(y))
-        Cropped = gray[topx:bottomx+1, topy:bottomy+1]
-        cv2.imshow("cropped",Cropped)
-        cv2.waitKey(0)
+                text = pytesseract.image_to_string(cropped, config='--psm 11')
+                print("programming_fever's License Plate Recognition\n")
+                print("Detected license plate Number is:",text)
+                img = cv2.resize(img,(500,300))
+                cropped = cv2.resize(cropped,(400,200))
+                cv2.imshow('car',img)
+                cv2.imshow('Cropped',cropped)
 
-        text = pytesseract.image_to_string(Cropped, config='--psm 11')
-        print("programming_fever's License Plate Recognition\n")
-        print("Detected license plate Number is:",text)
-        img = cv2.resize(img,(500,300))
-        Cropped = cv2.resize(Cropped,(400,200))
-        cv2.imshow('car',img)
-        cv2.imshow('Cropped',Cropped)
-
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+                cv2.waitKey(0)
+                cv2.destroyAllWindows()

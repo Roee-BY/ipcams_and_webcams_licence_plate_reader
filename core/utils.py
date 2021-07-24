@@ -126,7 +126,6 @@ def image_preprocess(image, target_size, gt_boxes=None):
 
 def get_boxes(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES)):
     num_classes = len(classes)
-    print(classes)
     image_h, image_w, _ = image.shape
 
     out_boxes, out_scores, out_classes, num_boxes = bboxes
