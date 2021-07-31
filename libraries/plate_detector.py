@@ -107,7 +107,7 @@ class plate_reader:
 		# return the built options string
 		return options
 
-	def find_and_ocr(self, image, psm=7, clearBorder=False):
+	def find_and_ocr(self, image,sigma,lr=0,psm=7,clearBorder=False):
 		# initialize the license plate text
 		lpText = None
 		# convert the input image to grayscale, locate all candidate
@@ -122,7 +122,7 @@ class plate_reader:
 		if lp is not None:
 			# OCR the license plate
 			options = self.build_tesseract_options(psm=psm)
-			lpText = cleanup_text(pytesseract.image_to_string(lp, config=options))
+			lpText = cleanup_text(pytesseract.image_to_string(lp, config=options),sigma,lr)
 			self.debug_imshow("License Plate", lp)
 		# return a 2-tuple of the OCR'd license plate text along with
 		# the contour associated with the license plate region
@@ -137,7 +137,13 @@ class plate_reader:
 			if waitKey:
 				cv2.waitKey(0)
 				
-def cleanup_text(text):
+def cleanup_text(text,sigma,lr):
 	# strip out non-ASCII text so we can draw the text on the image
 	# using OpenCV
-	return "".join([c if (ord(c) < 128 and ord(c) > 31) else "" for c in text]).strip()
+	text = "".join([c if (ord(c) < 128 and ord(c) > 31) and (c in sigma) else "" for c in text]).strip()
+	if lr==0:
+		return text
+	lr = lr.split("-")
+	if lr[0]<= len(text) and lr[1]>=len(text):
+		return text
+	return None

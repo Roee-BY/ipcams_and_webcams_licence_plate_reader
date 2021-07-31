@@ -7,3 +7,6 @@ yolov4-tiny-pretflite-416/*
 .idea/*
 core/__pycache__/*
 libraries/__pycache__/*
+additional_versions/*
+log.txt
+
