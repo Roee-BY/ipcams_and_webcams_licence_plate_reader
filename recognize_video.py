@@ -101,13 +101,13 @@ while (True):
 				# draw the bounding box on the license plate
 				box = cv2.boxPoints(cv2.minAreaRect(lpCnt))
 				box = box.astype("int")
-				cv2.drawContours(image, [box], -1, (0, 255, 0), 2)
+				cv2.drawContours(image, [box], -1, (0, 0, 255), 2)
 				# compute a normal (unrotated) bounding box for the license
 				# plate and then draw the OCR'd license plate text on the
 				# image
 				(x, y, w, h) = cv2.boundingRect(lpCnt)
 				cv2.putText(image, lpText, (x, y - 15),
-							cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 0, 0), 2)
+							cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
 				# show the output ANPR image
 				cv2.imshow("Output ANPR", image)
 				cv2.waitKey(0)
