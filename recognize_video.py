@@ -107,7 +107,7 @@ while (True):
 				# image
 				(x, y, w, h) = cv2.boundingRect(lpCnt)
 				cv2.putText(image, lpText, (x, y - 15),
-							cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+							cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 0, 0), 2)
 				# show the output ANPR image
 				cv2.imshow("Output ANPR", image)
 				cv2.waitKey(0)

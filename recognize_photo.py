@@ -68,7 +68,7 @@ for x in boxes:
             # image
             (x, y, w, h) = cv2.boundingRect(lpCnt)
             cv2.putText(image, lpText, (x, y - 15),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 0, 0), 2)
             # show the output ANPR image
             print("[INFO] ", lpText)
             print(len(lpText))
