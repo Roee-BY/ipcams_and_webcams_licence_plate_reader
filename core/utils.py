@@ -124,7 +124,7 @@ def image_preprocess(image, target_size, gt_boxes=None):
         gt_boxes[:, [1, 3]] = gt_boxes[:, [1, 3]] * scale + dh
         return image_paded, gt_boxes
 
-def get_boxes(image, bboxes, classes=read_class_names(cfg.YOLO.CLASSES)):
+def get_boxes(image, bboxes, classes):
     num_classes = len(classes)
     image_h, image_w, _ = image.shape
 
