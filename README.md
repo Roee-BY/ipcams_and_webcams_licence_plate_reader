@@ -93,6 +93,14 @@ py -m pip install opencv-python
 py -m pip install argparse
 ```
 
+##costume data
+if you want to you can always train the model yourself and try to achieve better results or using more powerful hardware on larger photos in this case you can change the size of the picture the model train on
+, for that purpose i included the google colab notebook that i used to train the model
+to train  a new model create a dataset (i recommend using roboflow) and using the notebook train the model and export the following files:
+1. the tflite weights file which is in android\app\src\main\assets\yolov4-416-fp32.tflite
+2. the obj.names file
+
+
 ## Built With
 
 * [Tesseract-OCR](https://github.com/UB-Mannheim/tesseract/wiki) - The OCR model used
