@@ -93,7 +93,7 @@ py -m pip install opencv-python
 py -m pip install argparse
 ```
 
-##costume data
+## Tensorflow Lite Model
 if you want to you can always train the model yourself and try to achieve better results or using more powerful hardware on larger photos in this case you can change the size of the picture the model train on
 , for that purpose i included the google colab notebook that i used to train the model
 to train  a new model create a dataset (i recommend using roboflow) and using the notebook train the model and export the following files:
